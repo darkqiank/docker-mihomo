@@ -8,11 +8,8 @@ on:
 
 jobs:
   main:
-    runs-on: Ubuntu-20.04
+    runs-on: Ubuntu-latest
     steps:
-      - name: Set current date as env variable
-        run: echo "DATE=$(date +'%Y.%m.%d')" >> $GITHUB_ENV
-
       - name: Check out the repo
         uses: actions/checkout@v3
 
@@ -29,7 +26,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build and push
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           platforms: |
             linux/amd64
@@ -38,5 +35,7 @@ jobs:
             linux/arm/v7
           push: true
           tags: |
-            yikyo/clash.meta:latest
-            yikyo/clash.meta:${{ env.DATE }}
+            izumiko/clash-meta:latest
+            izumiko/clash-meta:${{ vars.CLASH_META_VERSION }}
+          build-args: |
+            CLASH_META_VERSION=${{ vars.CLASH_META_VERSION }}
