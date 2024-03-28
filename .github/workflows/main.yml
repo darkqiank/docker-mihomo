@@ -35,7 +35,7 @@ jobs:
             linux/arm/v7
           push: true
           tags: |
-            izumiko/mihomo:latest
-            izumiko/mihomo:${{ vars.MIHOMO_VERSION }}
+            darkqiank/mihomo:latest
+            darkqiank/mihomo:${{ vars.MIHOMO_VERSION }}
           build-args: |
             MIHOMO_VERSION=${{ vars.MIHOMO_VERSION }}
